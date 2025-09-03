@@ -1,6 +1,10 @@
 
 # Sentiment Classifier (SVM / Naive Bayes)
 
+This project performs **sentiment classification** (positive / negative) from feedback using 2 models:
+- **SVM** (LinearSVC)  
+- **Naive Bayes** (MultinomialNB)  
+
 ## Install
 ```bash
 python -m venv .venv
@@ -43,4 +47,5 @@ python -m src.main --config config.yaml --model nb --ngram_max 3
 Outputs:
 - Saved model: `artifacts/model_<name>.pkl`
 - Predictions: `outputs/predictions_<name>.csv`
+- Metrics: `outputs/metrics_<name>.csv` and `outputs/metrics_<name>.json`
 ```
