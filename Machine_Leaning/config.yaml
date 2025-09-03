@@ -1,0 +1,14 @@
+train_path: data/UIT/train.csv
+test_path: data/UIT/test.csv
+text_col: comment
+label_col: label
+model: svm
+tfidf:
+  ngram_min: 1
+  ngram_max: 2
+  min_df: 2
+  max_df: 0.9
+artifacts_dir: artifacts
+outputs_dir: outputs
+model_name: null
+replace_list_path: replace_list.json
