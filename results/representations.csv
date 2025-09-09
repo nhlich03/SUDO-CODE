@@ -1,0 +1,5 @@
+representation,num_docs,vocab_size,nonzeros,sparsity
+BoW unigram,5000,21915,781215,0.9929
+BoW uni+bi,5000,179224,1566426,0.9983
+TF-IDF unigram,5000,21915,781215,0.9929
+TF-IDF uni+bi,5000,179224,1566426,0.9983
