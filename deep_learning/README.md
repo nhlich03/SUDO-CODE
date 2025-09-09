@@ -1,80 +1,54 @@
-# Text Classification with PyTorch (Vietnamese 10 Topics)
+# deep-learning (Text Classification, PyTorch)
 
-This project implements a simple **text classification** pipeline using **PyTorch** on the [VNTC dataset](https://github.com/duyvuleo/VNTC).  
-The dataset contains Vietnamese news articles categorized into 10 different topics.
+This is your notebook split into `.py` files for **Vietnamese text classification** with a simple average-embedding MLP head.
 
----
-
-## Project Structure
-
+## Structure
 ```
-.
-├── deep_learning.ipynb   # Main notebook (preprocessing, training, evaluation)
-├── vocab.json            # Saved vocabulary (optional)
-├── best_model.pt         # Saved best model (checkpoint)
-└── README.md
+deep-learning/
+  main.py
+  data.py
+  model.py
+  train.py
+  eval.py
+  utils.py
+  configs/
+    config.yaml
+  outputs/
+    checkpoints/
+    logs/
+    reports/
+  requirements.txt
+  README.md
 ```
 
----
+## What matches your notebook
+- Preprocessing (regex replacements + stopwords) in `data.py::Preprocessing`
+- Vocabulary building with `Vocab` (PAD=0, OOV=1) and `numericalize`
+- `TxtClsDataset` + `collate_fn` returning `(padded_ids, lengths, labels)`
+- `TextClassifier` with averaged embeddings → FC → ReLU → Dropout → FC
+- `Trainer` loop with early stopping on val accuracy and saving `best.pth`
+- Classification report and confusion matrix in `outputs/reports/` after eval
+- LabelEncoder classes saved to `outputs/label_classes.json`
 
-## Features
-- Vietnamese text preprocessing:
-  - Lowercasing, regex normalization for numbers (`1k → 1 ngàn`, `50% → 50 phần trăm`, etc.)
-  - Remove special characters
-  - Tokenization with simple `.split()` (or can replace with Vietnamese tokenizer)
-  - Stopword removal
-- Vocabulary building with frequency cutoff (`min_freq`, `max_vocab`)
-- Custom `Dataset` and `DataLoader` with padding and batching
-- Simple neural model:
-  - Embedding → Average pooling → Fully connected layers
-  - Dropout & ReLU
-- Training pipeline with:
-  - CrossEntropyLoss + Adam optimizer
-  - Early stopping based on validation accuracy
-  - Model checkpointing
-- Evaluation with:
-  - Accuracy, Precision, Recall, F1-score
-  - Confusion Matrix
-  - Training/Validation loss & accuracy curves
+## Run
+1) Install deps
+```
+pip install -r requirements.txt
+```
 
----
+2) Edit paths in `configs/config.yaml` to point to your CSV & stopwords.
 
-## Dataset
-We use the **VNTC - Vietnamese News Text Classification** dataset.  
-- **10 Topics**:
-  - Chính trị Xã hội
-  - Đời sống
-  - Khoa học
-  - Kinh doanh
-  - Pháp luật
-  - Sức khỏe
-  - Thế giới
-  - Thể thao
-  - Văn hóa
-  - Vi tính  
+3) Train
+```
+python main.py --config configs/config.yaml train
+```
 
-- Train size: ~30,000 samples  
-- Test size: ~50,000 samples  
+4) Evaluate
+```
+python main.py --config configs/config.yaml eval
+```
 
----
-
-## Results
-
-- **Test Accuracy**: ~89.7%  
-- **Macro F1-score**: ~0.87  
-- **Weighted F1-score**: ~0.89  
-
-### Strongest classes:
-- Thể thao, Vi tính, Thế giới (>92% F1)
-
-### Hardest classes:
-- Đời sống, Khoa học (<77% F1)
-
----
-
-## Future Improvements
-- Use pretrained Vietnamese embeddings (fastText, PhoBERT, viBERT).  
-- Apply deeper architectures (CNN, LSTM, Transformer).  
-- Data augmentation or rebalancing for underperforming classes.  
-- More advanced tokenization for Vietnamese (e.g. `underthesea`, `pyvi`).  
- 
+5) (Optional) CSV inference
+```
+python main.py --config configs/config.yaml infer --input /path/to/new.csv
+```
