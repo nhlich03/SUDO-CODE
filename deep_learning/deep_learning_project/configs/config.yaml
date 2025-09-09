@@ -1,0 +1,47 @@
+# Text classification config (split from your notebook code)
+experiment_name: "baseline_textclf"
+seed: 42
+device: "cuda"   # "cuda" or "cpu"
+
+data:
+  format: "csv"                    # fixed
+  train_path: "/kaggle/input/data-nlp-30k/train.csv"
+  test_path:  "/kaggle/input/data-nlp-30k/test.csv"
+  text_col: "Text_Processing"      # after preprocessing
+  raw_text_col: "Text"             # original column to preprocess
+  label_col: "Labels"
+  stopwords_path: "/kaggle/input/vietnamese-stopwords/vietnamese-stopwords-dash.txt"
+
+  # vocab
+  max_vocab: 50000
+  min_freq: 1
+  PAD: 0
+  OOV: 1
+
+  # splits
+  val_size: 0.2
+  stratify: true
+  random_state: 42
+
+loader:
+  batch_size: 64
+  num_workers: 4
+
+model:
+  name: "TextClassifier"
+  emb_dim: 128
+  hidden_dim: 128
+  dropout: 0.3
+
+train:
+  lr: 0.002
+  epochs: 10
+  patience: 5
+
+eval:
+  save_reports_dir: "outputs/reports"   # classification_report.txt & confusion_matrix.csv
+
+infer:
+  # Optional: path to a CSV file with a text column (same name as data.text_col)
+  input_csv: null
+  output_csv: "outputs/reports/infer.csv"

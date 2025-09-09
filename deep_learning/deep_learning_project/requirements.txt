@@ -1,0 +1,8 @@
+torch
+pyyaml
+pandas
+numpy
+scikit-learn
+matplotlib
+pandarallel
+underthesea
