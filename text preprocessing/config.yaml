@@ -1,0 +1,23 @@
+# Dataset on Kaggle
+dataset:
+  id: "haitranquangofficial/vietnamese-online-news-dataset"
+  file: "news_dataset.json"
+
+# Sampling data
+sample:
+  size: 5000
+  random_state: 42
+
+# Vectorizer
+vectorizer:
+  min_df: 2
+  max_df: 0.9
+  ngrams_uni: [1, 1]
+  ngrams_bi: [1, 2]
+  tfidf_norm: "l2"
+
+# Stopwords file
+stopwords_txt: "stop_words.txt"
+
+# Top-k terms
+top_k: 20
