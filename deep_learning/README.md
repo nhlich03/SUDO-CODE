@@ -21,7 +21,7 @@ deep-learning/
   README.md
 ```
 
-## What matches your notebook
+## Pipeline
 - Preprocessing (regex replacements + stopwords) in `data.py::Preprocessing`
 - Vocabulary building with `Vocab` (PAD=0, OOV=1) and `numericalize`
 - `TxtClsDataset` + `collate_fn` returning `(padded_ids, lengths, labels)`
