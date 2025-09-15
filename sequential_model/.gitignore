@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv/
+venv/
+output/checkpoints/
+output/history.json
+output/vocab.json
+sample_data/datasub.csv

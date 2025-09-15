@@ -1,0 +1,4 @@
+torch>=2.2
+pyyaml>=6.0
+kagglehub>=0.2.5
+pandas>=2.0

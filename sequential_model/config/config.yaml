@@ -1,0 +1,69 @@
+project:
+seed: 42
+device: auto # "auto" | "cpu" | "cuda"
+out_dir: output
+ckpt_dir: output/checkpoints
+vocab_path: output/vocab.json
+
+
+# Data pipeline
+data:
+use_kagglehub: true
+kaggle_dataset: iambestfeeder/10000-vietnamese-books
+# If you already have data, set use_kagglehub: false and point data_dir to your folder
+data_dir: /kaggle/input/10000-vietnamese-books/output
+
+
+preprocess:
+para_token: "<PARA>"
+bos_token: "<BOS>"
+eos_token: "<EOS>"
+min_words: 50
+drop_patterns:
+- "(?im)^\s*mục\s*lục\s*$"
+- "(?im)^\s*lời\s*cuối.*$"
+- "(?im)^\s*nguồn\s*:.*$"
+- "(?im)^\s*phát\s*hành\s*:.*$"
+- "(?im)^\s*chào mừng.*(dự án|đón đọc).*$"
+- "http[s]?://\\S+"
+
+
+vocab:
+min_freq: 1
+max_size: 50000
+
+
+windowing:
+max_len: 128
+stride: 128
+batch_size: 32
+
+
+split:
+train_ratio: 0.7
+val_ratio: 0.1
+shuffle: true
+
+
+model:
+emb_dim: 256
+hidden_dim: 384
+num_layers: 2
+dropout: 0.3
+
+
+train:
+epochs: 5
+lr: 0.0003
+weight_decay: 0.01
+grad_clip: 1.0
+patience: 2 # early stopping patience (by val perplexity)
+use_scheduler: true
+
+
+inference:
+max_new_tokens: 200
+temperature: 1.0
+top_k: 50
+top_p: 0.9
+prompt: "<BOS> "
