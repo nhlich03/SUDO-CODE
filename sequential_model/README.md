@@ -58,10 +58,10 @@ python -m src.generate --config config/config.yaml --prompt "<BOS> " --max_new_t
 
 After training:
 
-- **Input**: A starting text prompt, usually beginning with `<BOS>`.  
+- **Input**: A starting text prompt.  
   Example:
   ```bash
-  python -m src.generate --config config/config.yaml --prompt "<BOS> Ngày xửa ngày xưa" --max_new_tokens 50
+  python -m src.generate --config config/config.yaml --prompt "Ngày xửa ngày xưa" --max_new_tokens 50
   ```
 
 - **Output**: The model generates a continuation of the text based on the prompt.  
