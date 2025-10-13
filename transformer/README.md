@@ -5,6 +5,7 @@ This is your notebook split into `.py` files for fine-tuning a Transformer-based
 ---
 
 ## Structure
+```
 machine-translation-transformer/
     src/
         model.py
@@ -19,7 +20,7 @@ machine-translation-transformer/
     requirements.txt
     README.md
     .gitignore
-
+```
 
 ---
 
