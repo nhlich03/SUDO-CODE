@@ -1,0 +1,10 @@
+transformers==4.45.2
+huggingface-hub==0.25.2
+datasets
+evaluate
+sentencepiece
+sacrebleu
+scikit-learn
+pandas
+pyyaml
+torch
